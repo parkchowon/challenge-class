@@ -14,17 +14,20 @@ function Controler() {
     setToasts,
   } = useContext(ToastContext);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setToasts([
-      ...toasts,
-      {
-        id: v4(),
-        title,
-        context,
-        time,
-      },
-    ]);
+  const handleSubmit = () => {
+    if (title === "" || context === "") {
+      alert("제목과 내용을 모두 입력해 주세요.");
+    } else {
+      setToasts([
+        ...toasts,
+        {
+          id: v4(),
+          title,
+          context,
+          time,
+        },
+      ]);
+    }
   };
   return (
     <div className="grid grid-cols-1 gap-y-6">
@@ -56,7 +59,7 @@ function Controler() {
         </div>
 
         <button
-          onClick={(e) => handleSubmit(e)}
+          onClick={() => handleSubmit()}
           className="bg-black text-white py-3 text-[15px] rounded-md font-medium hover:bg-black/80 transition active:bg-black/70"
         >
           토스트 띄우기
